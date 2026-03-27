@@ -10,7 +10,7 @@ form.addEventListener("submit", async (e) => {
   const message = document.getElementById("message").value.trim();
 
   try {
-    const response = await fetch("/api/messages",s {
+    const response = await fetch("/api/messages",{
       method: "POST",
       headers: {
         "Content-Type": "application/json"
@@ -26,5 +26,6 @@ form.addEventListener("submit", async (e) => {
 
   } catch (error) {
     console.error(error);
+    alert("Failed to send message ❌");
   }
 });
