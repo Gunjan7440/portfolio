@@ -49,18 +49,17 @@ router.post("/", async (req, res) => {
 
 
 
-    await transporter.sendMail({
+    try {
 
-      from: process.env.EMAIL,
+const info = await transporter.sendMail({
 
-      to: process.env.EMAIL,
+  from: process.env.EMAIL,
+  to: process.env.EMAIL,
+  replyTo: email,
 
-      replyTo: email,
+  subject:"New Portfolio Contact Message",
 
-      subject:"New Portfolio Contact Message",
-
-      text:
-`
+  text:`
 Name: ${name}
 
 Email: ${email}
@@ -69,7 +68,18 @@ Message:
 ${message}
 `
 
-    });
+});
+
+
+console.log("EMAIL SENT:", info.messageId);
+
+
+}
+catch(emailError){
+
+console.log("EMAIL FAILED:", emailError.message);
+
+}
 
 
 
