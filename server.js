@@ -10,6 +10,21 @@ const path = require("path");
 const connectDB = require("./config/db");
 
 const app = express();
+const transporter = nodemailer.createTransport({
+
+  service: "gmail",
+
+  auth: {
+    user: process.env.EMAIL,
+    pass: process.env.PASSWORD
+  }
+
+});
+
+
+await transporter.verify();
+
+console.log("Email server ready");
 
 // =====================
 // Middleware
